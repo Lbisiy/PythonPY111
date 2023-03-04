@@ -13,4 +13,11 @@ def sinx(x: Union[int, float]) -> float:
     :param x: x значение в радианах
     :return: значение sin(x)
     """
-    ...  # TODO вычислить sin(x) с помощью разложения сумму бесконечного ряда
+
+    result = 0
+
+    for n in count():
+        val = pow(-1, n) * pow(x, 2 * n + 1) / factorial(2 * n + 1)
+        result += val
+        if abs(val) < DELTA:
+            return result
