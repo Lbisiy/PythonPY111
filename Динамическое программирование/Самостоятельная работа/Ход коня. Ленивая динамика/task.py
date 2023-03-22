@@ -9,7 +9,20 @@ def calculate_paths(shape: Tuple[int, int]) -> int:
     :param shape: размер доски в виде кортежа
     :return: количество путей согласно заданным условиям
     """
-    ... # TODO реализуйте подсчет ходов коня
+
+    m, n = shape
+
+    @lru_cache
+    def recursion(x, y):
+        if x == 0 and y == 0:
+            return 1
+
+        if not 0 <= x < n or not 0 <= y < m:
+            return 0
+
+        return recursion(x - 2, y - 1) + recursion(x - 2, y + 1) + recursion(x - 1, y - 2) + recursion(x + 1, y - 2)
+
+    return recursion(n - 1, m - 1)
 
 
 if __name__ == '__main__':
